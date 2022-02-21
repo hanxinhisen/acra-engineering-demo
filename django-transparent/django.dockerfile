@@ -35,18 +35,18 @@ RUN echo 'root:!' | chpasswd -e
 EXPOSE 8000
 
 # Install packages
-RUN apk update
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ; apk update
 
-RUN apk add --no-cache bash python3 py3-pip postgresql-dev postgresql-client npm \
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;apk add --no-cache bash python3 py3-pip postgresql-dev postgresql-client npm \
         libxslt-dev jpeg-dev
-RUN pip3 install --no-cache-dir --upgrade pip
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;pip3 install --no-cache-dir --upgrade pip
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
-RUN apk add gcc python3-dev musl-dev libxml2-dev git alpine-sdk rsync
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;apk add gcc python3-dev musl-dev libxml2-dev git alpine-sdk rsync
 
 # Fetch and patch django
 RUN mkdir /app
-RUN git clone $VCS_URL /app/ \
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;git clone $VCS_URL /app/ \
     && cd /app \
     && git checkout $VCS_REF
 
@@ -67,7 +67,7 @@ RUN patch \
     /app/djangoproject/settings/dev.py.patch
 
 # Install python modules
-RUN pip3 install --no-cache-dir -r /app/requirements/dev.txt
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;pip3 install --no-cache-dir -r /app/requirements/dev.txt
 RUN cd /app && npm install
 
 ENV DJANGOPROJECT_DATA_DIR /app.data

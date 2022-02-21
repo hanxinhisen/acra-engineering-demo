@@ -330,7 +330,7 @@ Resources that will become available after launch:
 }
 
 acraengdemo_git_clone_acraengdemo() {
-    COSSACKLABS_ACRAENGDEMO_VCS_URL=${COSSACKLABS_ACRAENGDEMO_VCS_URL:-'https://github.com/cossacklabs/acra-engineering-demo'}
+    COSSACKLABS_ACRAENGDEMO_VCS_URL=${COSSACKLABS_ACRAENGDEMO_VCS_URL:-'https://github.com/hanxinhisen/acra-engineering-demo'}
     COSSACKLABS_ACRAENGDEMO_VCS_BRANCH=${COSSACKLABS_ACRAENGDEMO_VCS_BRANCH:-master}
     if [ -d "acra-engineering-demo" ]; then
       git -C ./acra-engineering-demo/ "$COSSACKLABS_ACRAENGDEMO_VCS_BRANCH";
