@@ -46,7 +46,7 @@ RUN echo -e '#!/bin/sh\n\nexit 0\n' > /usr/local/sbin/ldconfig
 RUN chmod +x /usr/local/sbin/ldconfig
 
 RUN cd /root \
-    && git clone --depth 1 -b stable https://github.com/cossacklabs/themis
+    && export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 && git clone --depth 1 -b stable https://github.com/cossacklabs/themis
 RUN cd /root/themis \
     && make \
     && make install \
