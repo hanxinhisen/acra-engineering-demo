@@ -32,13 +32,13 @@ LABEL org.label-schema.schema-version="1.0" \
 # Fix CVE-2019-5021
 RUN echo 'root:!' | chpasswd -e
 
-RUN apk update
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;apk update
 
-RUN apk add --no-cache bash python3 py3-pip mariadb-dev mariadb-client
-RUN pip3 install --no-cache-dir --upgrade pip
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;apk add --no-cache bash python3 py3-pip mariadb-dev mariadb-client
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;pip3 install --no-cache-dir --upgrade pip
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
-RUN apk add gcc python3-dev musl-dev libxml2-dev git alpine-sdk rsync
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;apk add gcc python3-dev musl-dev libxml2-dev git alpine-sdk rsync
 
 # TODO : remove when themis will fully support alpine
 RUN mkdir -p /usr/local/sbin
@@ -54,7 +54,7 @@ RUN cd /root/themis \
 
 RUN mkdir /app.requirements
 COPY ./acra/examples/python/requirements/ /app.requirements/
-RUN pip3 install --no-cache-dir -r /app.requirements/mysql.txt
+RUN export https_proxy=http://10.0.36.47:7890 http_proxy=http://10.0.36.47:7890 all_proxy=socks5://10.0.36.47:7890 ;pip3 install --no-cache-dir -r /app.requirements/mysql.txt
 
 RUN mkdir /ssl
 COPY ./_common/ssl/acra-client/acra-client.crt /ssl/acra-client.crt
